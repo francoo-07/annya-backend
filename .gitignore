@@ -7,4 +7,4 @@ __pycache__/
 *.pyc
 
 # Variables de entorno y secretos
-.env
+.env  
