@@ -6,6 +6,12 @@ from pydantic import BaseModel
 # 2. Creamos la instancia (El motor) de nuestra aplicacion
 app = FastAPI()
 
+import models
+from database import engine
+
+# Esta es la instrucción mágica que crea las tablas en Supabase
+models.Base.metadata.create_all(bind=engine)
+
 #3. Congiguramos el CORS (El puente para la comunicacion entre mi front y este back)
 #Aqui le dijo a fastAPI que URLS se pueden comunicar con el 
 origenes_permitidos = [
@@ -33,7 +39,7 @@ class UsuarioRegistro (BaseModel):
 @app.get("/")
 def leer_raiz():
     # En python usa diccionarios, que solitos se convierten en JSON para react
-    return {"mensaje": "Hola mundo, desde ek backend de annya vacio. holaa"}
+    return {"mensaje": "Hola mundo, desde ek backend de annya vacio."}
 
 #Segunda ruta para recibir los datos de registro (Aqui se usa post porque estamos enviando informacion y no podiendola a la bd)
 @app.post("/registro")
