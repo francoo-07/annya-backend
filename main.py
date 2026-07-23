@@ -3,6 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from seguridad import obtener_hash_password
 
 # Importamos lo que creamos para la base de datos
 import models
@@ -62,7 +63,7 @@ def registrar_usuario(usuario: UsuarioRegistro, db: Session = Depends(get_bd)):
       nombre = usuario.nombre,
       correo = usuario.correo,
       #aqui la contraseña esta mal guardada pero despues la cambiare 
-      password = usuario.password
+      password = obtener_hash_password(usuario.password)
    )
 
    # el ulgtimo paso es guardarlo en supabase 
