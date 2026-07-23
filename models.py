@@ -11,4 +11,4 @@ class Usuario(Base):
   nombre = Column(String, index=True)
   # unique=true es para que el correo sea unico 
   correo = Column(String, unique=True, index=True)
-  passqord = Column(String)
+  password = Column(String)
